@@ -24,9 +24,9 @@ func main() {
 
 	wg.Add(len(urls))
 	for _, url := range urls {
+		blockChannel <- struct{}{}
 
 		go func(str string) {
-			blockChannel <- struct{}{}
 			defer func() {
 				<-blockChannel
 				wg.Done()
